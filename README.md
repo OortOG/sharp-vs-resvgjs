@@ -1,4 +1,4 @@
-# sharp vs resvg-js
+# sharp 0.33.5 vs resvg-js 2.6.2
 
 A comparison between [sharp](https://github.com/lovell/sharp) vs [resvg-js](https://github.com/yisibl/resvg-js) performance to bulk convert SVGs to PNGs.
 
@@ -23,19 +23,19 @@ rsvg-js configuration: [`scripts/benchmark/resvg.js`](/scripts/benchmark/resvg.j
 
 ## Results
 
-### sharp is much faster
+### sharp is _much_ faster
 
 When converting 400 SVG icons from [simple-icons](https://www.npmjs.com/package/simple-icons) to 2500 DPI 800px width PNGs, sharp is 3x faster than resvg-js.
 
 ```
-resvg: { duration: '5472ms', icons: 400 }
-sharp: { duration: '1569ms', icons: 400 }
-sharp is faster by 3.49x
+resvg: { duration: '5217ms', icons: 400 }
+sharp: { duration: '768ms', icons: 400 }
+sharp is faster by 6.79x
 ```
 
-### resvg-js crashes on too many icons
+### resvg-js crashes on too many icons [UPDATED]
 
-The number of icons is [limited to 400](/scripts/benchmark/index.js#L13) because when processing too many icons at once, resvg-js crashes the whole Node.js process:
+Previously it was reported that the number of icons was [limited to 400](/scripts/benchmark/index.js#L13). This was  because when processing too many icons at once, resvg-js crashes the whole Node.js process with the following error:
 
 ```
 $ pnpm benchmark
@@ -47,6 +47,8 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 fatal runtime error: failed to initiate panic, error 5
 ```
 
+However, as of 20241125 with resvg-js 2.6.2 on Apple silicon, we have not been able to reproduce this issue. 
+
 ### rsvg-js doesn't yield expected DPI
 After benchmarking, the resulting PNGs are saved to `pngs/`. When comparing icons between sharp and rsvg, the DPI on sharp is 2400 (as expected), but the DPI on resvg-js is 72.
 
@@ -56,3 +58,5 @@ Zoom in to compare difference
 | resvg-js - 11.1 KB - 72 DPI | sharp - 16.6 KB - 2400 DPI |
 | - | - |
 | <img src="./pngs/resvg/500px.svg.png"> | <img src="./pngs/sharp/500px.svg.png"> |
+
+NOTE: __While the DPI issue demonstrated remains in these test results, this tester has not explored any improvements to resvg-js since the initial tests using v 2.1.0 that would improve output quality and DPI specifically.__

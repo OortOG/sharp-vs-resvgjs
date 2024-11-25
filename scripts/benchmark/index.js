@@ -59,5 +59,5 @@ import { startTimer, writeToDisk } from './utils.js';
 		return elapsed;
 	})();
 
-	console.log('sharp is faster by', (resvgTime / sharpTime).toFixed(2) + 'x');
+	console.log('sharp is faster by', `${(resvgTime / sharpTime).toFixed(2)}x`);
 })();

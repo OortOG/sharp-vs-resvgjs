@@ -6,7 +6,7 @@ export const startTimer = () => {
 	return () => Date.now() - startTime;
 };
 
-export async function writeToDisk(pngs) {
+export const writeToDisk = async (pngs) => {
 	await Promise.all(
 		pngs.map(
 			async ([filePath, buffer]) => {
@@ -18,4 +18,4 @@ export async function writeToDisk(pngs) {
 			},
 		),
 	);
-}
+};

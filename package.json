@@ -1,22 +1,22 @@
 {
 	"name": "sharp-vs-resvgjs",
-	"private": true,
 	"author": {
 		"name": "Hiroki Osame",
 		"email": "hiroki.osame@gmail.com"
 	},
-	"type": "module",
+	"private": true,
 	"files": [],
+	"type": "module",
 	"scripts": {
 		"lint": "eslint .",
 		"benchmark": "node scripts/benchmark"
 	},
 	"devDependencies": {
-		"@pvtnbr/eslint-config": "^0.30.0",
-		"@resvg/resvg-js": "^2.1.0",
-		"eslint": "^8.21.0",
-		"sharp": "^0.30.7",
-		"simple-icons": "^7.6.0"
+		"@resvg/resvg-js": "^2.6.2",
+		"eslint": "^9.15.0",
+		"lintroll": "^1.11.0",
+		"sharp": "^0.33.5",
+		"simple-icons": "^13.18.0"
 	},
 	"eslintConfig": {
 		"extends": "@pvtnbr"
